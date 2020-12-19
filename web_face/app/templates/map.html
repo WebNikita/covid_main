@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/find_covid/static/css/warehouse.css" >
+    <link rel="stylesheet" href="/find_covid/static/css/bootstrap.min.css" >
+    <link rel="icon" type="image/png" href="/find_covid/static/images/icons/favicon.ico">
+    <link rel="stylesheet" href="/find_covid/static/css/rMap.css">
+    <title>Map</title>
+</head>
+    <body>
+        <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            
+               <a class="navbar-brand nav-link" href="{{url_for('index')}}">COVID FINDER</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="col-xl-12">
+                    <div class="navbar-nav justify-content-end">
+                        <a class="nav-item nav-link" href="{{url_for('map')}}">{{ navigation[0] }}<span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link" href="{{url_for('LK')}}">{{ navigation[1] }}</a>
+                        <a class="nav-item nav-link" href="{{url_for('logout')}}">{{ navigation[2] }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+     
+        </header>
+           <div class="container5">
+               <h1>Статистическая карта</h1>
+      <div class="catalog" id='map'>
+    	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    </div >
+        </div>
+        <div class="container6 " id='graph_1'>
+        <p> 
+          диаграмма №1
+        </p>
+        </div>
+            
+        <div class="container6" id='graph_2'>
+        <p> 
+          диаграмма №2
+        </p>
+        </div>
+         
+        
+    <script>
+        var graphs = {{plot | safe}};
+        var graph_1 = {{graph_1 | safe}};
+        var graph_2 = {{graph_2 | safe}};
+        Plotly.plot('map',graphs,{});
+        Plotly.plot('graph_1',graph_1,{});
+        Plotly.plot('graph_2',graph_2,{});
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Подключаем Bootstrap JS -->
+    <script src="/find_covid/static/js/post_script.js"></script> 
+    <script src="/find_covid/static/js/bootstrap.min.js"></script>
+    <script src="/find_covid/static/js/load_script.js"></script>
+        
+    </body>
+</html>
+
+

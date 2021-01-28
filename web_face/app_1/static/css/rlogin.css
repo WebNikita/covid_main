@@ -1,0 +1,26 @@
+body{
+    background-image: url("../images/RegistrLoginBackground.jpg")   
+}
+.container{
+    width: 350px;
+    height: 350px;
+    background-color: #9e948d;
+    margin: 250px auto 0 auto;
+    /*text-align: center;*/
+    box-shadow: 0 -6px 0 #ef4d42;
+    border-radius: 0 0 10px 10px
+}
+.otstup{
+transition: all 0.5s;
+color: #191819;
+margin: 46px;
+}
+input{
+    width: 250px;
+   /* border-radius: 4px;*/
+}
+
+nazv{
+    padding-left: 80px;
+}
+

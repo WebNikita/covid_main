@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/find_covid/static/css/warehouse.css" >
+    <link rel="stylesheet" href="/find_covid/static/css/bootstrap.min.css" >
+    <link rel="icon" type="image/png" href="/find_covid/static/images/icons/favicon.ico">
+    <link rel="stylesheet" href="/find_covid/static/css/rLK.css">
+    <title>Private office</title>
+</head>
+    <body>
+        <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            
+               <a class="navbar-brand nav-link" href="#" id="scroll5">COVID FINDER <img src="/find_covid/static/images/logo1.png" width="27" height="27"></a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="col-xl-12">
+                    <div class="navbar-nav justify-content-end">
+                        <a class="nav-item nav-link" href="{{url_for('map')}}">{{ navigation[0] }}<span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link" href="{{url_for('LK')}}">{{ navigation[1] }}</a>
+                        <a class="nav-item nav-link" href="{{url_for('logout')}}">{{ navigation[2] }}
+                        </a>
+                </div>
+                </div>
+            </div>
+        </nav>
+     
+        </header>
+       <div>
+           <div class="content">
+               <h1>Добро пожаловать, <span id='name'></span></h1>   
+           </div>
+    
+              <div class="container2">
+                  <div class="text1">
+                  <p>Ваш статус: <span id='status'></span></p>
+                  <p>Контактировали ли вы с больным: <span id='contact'></span></p>
+                  <p>Симптомы заражения: <span id='symptoms'></span></p>
+                  <p>Ваша текущая геопазиция: <br> <span id='location'></span></p>
+                      </div>   
+                       <a href="#" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Изменить данные</a>  
+                  <p>Есть подозрение на COVID-19?
+                      COVID FINDER рекумендует обратиться к специалистам<a></a></p>
+                  <div class="container_phone">
+                      <div class="wrap">
+                          <a href="#">
+                              <div class="btn-phone-wrap">
+                                  <div class="btn-phone">
+                                       <div class="btn-phone-circle"></div>
+                                  </div>
+                                  <div class="btn-phone-circle2"></div>
+                              </div>
+                          </a>
+                      </div>
+                  </div>
+
+           
+           </div>
+            
+                
+      <div class="cntr">
+           <div class="input-form">
+           <p>Построить маршрут до:</p><input class="int" type="text" > 
+           </div>
+           
+           <a class="butt" href="#">До аптеки</a>
+      </div>
+                 
+            
+                
+        
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Моё состояние</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+            <div class="modal-body">
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Статус заболевания:</label>
+                <select id="form_status" class="form-control">
+                    <option value="Болею">Болею</option>
+                    <option value="Болел">Болел</option>
+                    <option value="Не болел">Не болел</option>
+                </select>    
+            </div>
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Контактировали ли вы с болными:</label>
+                <select id="form_contact" class="form-control">
+                    <option value="Контактировал">Контактировал</option>
+                    <option value="Не знаю">Не знаю</option>
+                    <option value="Не котактировал">Не котактировал</option>
+                </select>   
+            </div>
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Ваши симптомы(вбить симптомы через запятую):</label>
+                <textarea class="form-control" id="form_symptoms" aria-label="With textarea"></textarea>   
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-primary">Изменить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+           <div class="container_karta">
+           <h1>карта</h1>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+           </div>
+        
+   
+           <div class="row">
+           </div>
+             
+  </div>
+           
+
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+        navigator.geolocation.getCurrentPosition(showPosition); 
+        navigator.geolocation.getCurrentPosition(Infection);
+        navigator.geolocation.getCurrentPosition(PopularPlace);
+
+        function showPosition(position) {
+            /* Выводим координаты */
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            console.log(lat)
+            console.log(lon)
+        var data = JSON.stringify({
+                "email": '{{email}}',
+                "lat": lat,
+                "lon": lon
+            });
+
+        $.ajax({
+                    url: "https://it.school1298.ru/find_covid/get_user_data",
+                    method: "POST",
+                    contentType: 'application/json',
+                    data: data,
+                    success: function (response) {
+                    $("#name").append(response['name']);
+                    $("#status").append(response['status']);
+                    $("#contact").append(response['contact']);
+                    $("#symptoms").append(response['symptoms']);
+                    $("#location").append(response['geolocation']);
+                }
+            });
+        };
+    function Infection(position){
+        $('#probability_of_infection').click(function() {
+        var data = JSON.stringify({
+                "id": {{id}},
+                "lat": position.coords.latitude,
+                "lon": position.coords.longitude,
+                "type_of_public": $("#type_of_public").val()
+        });
+        $.ajax({
+                url: "https://it.school1298.ru/find_covid/probability_of_infection",
+                method: "POST",
+                contentType: 'application/json',
+                data: data,
+                success: function (response) {
+                    $(".modal").modal("hide");
+                    console.log(response);
+                    if (response == "5%"){
+                        $(".allerts").append(
+                            `<div class="alert alert-info alert-dismissible fade show" role="alert">
+                                Внимание! Шанс заражения ${response}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                 </button>
+                            </div>`)
+                    } else if (response == "20%"){
+                        $(".allerts").append(
+                            `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                Внимание! Шанс заражения ${response}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                 </button>
+                            </div>`)
+                    } else if (response == "60+%"){
+                        $(".allerts").append(
+                            `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                Внимание! Шанс заражения ${response}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                 </button>
+                            </div>`)
+                    } 
+                
+            }
+        });
+    });
+    };
+
+    $('#EditData').click(function() {
+        var data = JSON.stringify({
+                "status": $('#form_status').val(),
+                "contact": $('#form_contact').val(),
+                "symptoms": $('#form_symptoms').val()
+            });
+        
+        console.log(data)
+         $.ajax({
+                url: "https://it.school1298.ru/find_covid/edit_user_data",
+                method: "POST",
+                contentType: 'application/json',
+                data: data,
+                success: function (response) {
+                    $(".modal").modal("hide");
+                    console.log(response)
+
+                
+            }
+        });
+    });
+    $('#home').click(function() {
+        var data = JSON.stringify({
+                "id": {{id}}
+            });
+        
+        console.log(data)
+         $.ajax({
+                url: "https://it.school1298.ru/find_covid/user_at_home",
+                method: "POST",
+                contentType: 'application/json',
+                data: data,
+        });
+    });
+    function PopularPlace(position){
+        $('#add_visited_places').click(function() {
+        var data = JSON.stringify({
+                "user_id": {{id}},
+                "lat": position.coords.latitude,
+                "lon": position.coords.longitude,
+                "type_of_public": $("#visited_places").val()
+        });
+        $.ajax({
+                url: "https://it.school1298.ru/find_covid/add_visited_places",
+                method: "POST",
+                contentType: 'application/json',
+                data: data,
+                success: function (response) {
+                    $(".modal").modal("hide");
+                    console.log(response);
+                    
+                
+            }
+        });
+    });
+    };
+
+    
+    
+
+</script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=<ваш API-ключ>" type="text/javascript"></script>
+<script src="/find_covid/static/js/placemark.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<script src="/find_covid/static/js/bootstrap.min.js"></script>
+
+        
+        
+    </body>
+</html>
+
+
+
+                    

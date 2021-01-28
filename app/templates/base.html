@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/find_covid/static/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="/find_covid/static/css/warehouse.css" >
+    <link rel="icon" type="image/png" href="/find_covid/static/images/icons/favicon.ico">
+    <link rel="stylesheet" href="/find_covid/static/css/rIndex.css">
+    <link rel="stylesheet" href="/find_covid/static/css/r.css">
+    <title>COVID FINDER</title>
+</head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            
+               <a class="navbar-brand nav-link" href="{{url_for('index')}}">COVID FINDER</a>
+                
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="col-xl-12">
+                    <div class="navbar-nav justify-content-end">
+                        <a class="nav-item nav-link" href="#scroll1">О COVID-19<span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link" href="#scroll2">Как передается вирус</a>
+                        <a class="nav-item nav-link" href="#scroll3">Профилактика и меры предосторожности</a>
+                        <a class="nav-item nav-link" href="#scroll4">Контакты</a>
+                        <a class="nav-item nav-link" href="{{url_for('map')}}">{{ navigation[0] }}<span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link" href="{{url_for('LK')}}">{{ navigation[1] }}</a>
+                        <a class="nav-item nav-link" href="{{url_for('logout')}}">{{ navigation[2] }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {% block content %}
+         <div id="dg">
+        <video class="video" autoplay muted controls loop>
+                <source src="/find_covid/static/video.mp4">
+        </video>
+        </div>
+         
+        <div class="logo">
+            <p class="logo_media">COVID FINDER<img src="/find_covid/static/images/logo1.png" width="27" height="27"></p>
+        </div>
+        
+        <div class="container" id="scroll1">
+        <h1 align="center" class="NP">COVID-19</h1>
+            <p align="center">К концу апреля 2020 года, только ленивый не будет знать, что такое пандемия, коронавирус и коронавирусная инфекция COVID-19. Разберемся что это такое. Говоря человеческим языком, коронавирус SARS-CoV-2 это новый вирус из семейства коронавирусов (да, их много), открытый в декабре 2019 года в городе Ухань, Китай (до резкой вспышки инфекции в Китае, об этом вирусе ничего не было известно). Данный коронавирус вызывает заболевание COVID 19, которое может привести к пневмонии и смерти.</p>     
+        </div>
+        <div class="container1" id="scroll2">
+        <h2 align="center" class="NP">Как передается</h2>
+            <p align="center" class="p_media">Вирус SARS-CoV-2 (имеющий временное название 2019-nCoV) передается воздушно-капельным или контактным путем.
+Разносчиками являются только заболевшие коронавирусом люди (первоисточником может быть животное, но пока что оно не выявлено, домашние питомцы не опасны).
+Возбудители располагаются на слизистых оболочках дыхательных путей больного человека. Во время кашля или чихания вирус вырывается наружу вместе с микрокаплями слюны и заражает воздух, который вы можете случайно вдохнуть. Именно поэтому первыми методами защиты от заражения являются маска и соблюдение дистанции между людьми минимум 1,5 метра.
+Еще один путь передачи инфекции – контактный. Может быть прямой, когда заражение происходит через тактильный контакт непосредственно с больным человеком: рукопожатие, поцелуй, объятия, прикосновения и т. д. (если вы руками сначала трогаете больного, а потом свои слизистые).
+Или опосредованный, через предметы, быта, гигиены, столовые приборы, технику, дверные ручки и прочее (если вы руками трогаете зараженные поверхности, а потом прикасаетесь к носу, рту или глазам).</p>     
+        </div>
+                <div class="container1" id="scroll3">
+        <h3 align="center" class="NP">Профилактика, карантин и другие способы защитить себя от вируса</h3>
+            <p align="center" class="p_media">Сидите дома. Карантин и ограничение повседневных контактов – лучшая профилактика.
+Если есть такая возможность – выходите на улицу только по острой необходимости.
+Выходя на улицу – надевайте чистую/новую медицинскую маску или респиратор, очки.
+На улице не трогайте лицо руками. Вообще. (Ни рот, ни нос, ни глаза: заразиться можно через любую слизистую.)
+Обрабатывайте руки антисептиком после контакта с общедоступными предметами: дверные ручки, кнопки лифта, кнопки банкомата, деньги, поручни в маршрутке.
+Держите дистанцию 1,5 м.
+Во время кашля или чихания – прикрывайте лицо согнутым локтем или одноразовой салфеткой. После этого салфетку выбросьте, руки вымойте или обработайте дезинфицирующим средством.
+Зайдя в квартиру, вымойте руки при помощи мыла в течение 20 секунд. Личные предметы, которые вы трогали грязными руками, обработайте спиртосодержащими средствами (телефон, наушники).</p>     
+        </div>
+        
+        <div class="podval" id="scroll4">  
+            <div class="container_podval">
+            <a class="nav-item nav-link" href="#scroll5" align="center" id="NV">В начало</a>
+            <img src="/find_covid/static/images/logo1.png" width="90" height="90" class="photo">
+            </div>
+        </div>
+        {% endblock %}
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Подключаем Bootstrap JS -->
+        <script src="/find_covid/static/js/post_script.js"></script> 
+        <script src="/find_covid/static/js/bootstrap.min.js"></script>
+        <script src="/find_covid/static/js/load_script.js"></script>
+        </body>
+</html>
